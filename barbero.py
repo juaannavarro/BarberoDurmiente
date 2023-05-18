@@ -19,22 +19,24 @@ class Peluqueria:
         
         if self.silla._value > 0:
             self.silla.acquire()
+            print("Cliente se sienta en la silla de espera")
             self.control.release()
-            self.cliente.release()    
+            self.cliente.release()
+            print("Cliente despertando al peluquero")    
             self.peluquero.acquire()
             self.silla.release()
+            print("Cliente deja la silla de espera")
             self.cortarPelo()
         else:
             self.control.release()
             print("No hay sillas disponibles")
-        time.sleep(2)
+        time.sleep(4)
             
     def Peluquero(self):
         while True:
             self.cliente.acquire()
             self.peluquero.release()
-            self.cortarPelo()
-            time.sleep(2)
+            time.sleep(4)
             
             
 

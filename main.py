@@ -10,7 +10,7 @@ def main():
         cliente_thread = threading.Thread(target=peluqueria.Cliente)
         clientes_threads.append(cliente_thread)
         cliente_thread.start()  
-        time.sleep(2)
+        time.sleep(1)
         
     for cliente_thread in clientes_threads:
         cliente_thread.join()   
