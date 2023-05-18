@@ -3,27 +3,28 @@ import time
 
 class Peluqueria:
     def __init__(self):
+        self.control = threading.Semaphore(1)
         self.peluquero = threading.Semaphore(0)
         self.cliente = threading.Semaphore(0)
-        self.silla = threading.Semaphore(3)
-        self.control = threading.Semaphore(1)
+        self.silla = threading.Semaphore(4)
+
         
     def cortarPelo(self):
         print("Peluquero cortando el pelo")
-        time.sleep(3)
+        time.sleep(2)
         print("Peluquero termina de cortar el pelo")
         
     def Cliente(self):
         print("Cliente llega a la peluqueria")
         self.control.acquire()
         
-        if self.silla._value > 0 and self.silla._value <= 3:
+        if self.silla._value > 0 and self.silla._value <= 4:
             print('------Hay sillas disponibles------')
             self.silla.acquire()
             print("Cliente se sienta en la silla de espera")
             time.sleep(3)
             self.control.release()
-            if self.peluquero._value == 0:
+            if self.cliente._value == 0:
                 self.cliente.release()
                 print("Cliente despierta al peluquero")
                 time.sleep(3)
@@ -40,7 +41,7 @@ class Peluqueria:
                 print("Cliente deja la silla de espera")
                 time.sleep(3)
                 self.cortarPelo()
-        elif self.silla._value >= 4:
+        elif self.silla._value >= 5:
             self.control.release()
             print("No hay sillas disponibles")
         time.sleep(3)
