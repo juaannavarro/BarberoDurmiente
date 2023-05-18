@@ -32,7 +32,7 @@ class Peluqueria:
                 print("Cliente deja la silla de espera")
                 time.sleep(3)
                 print("Cliente se sienta en la silla del peluquero")
-                self.cortarPelo()
+                self.Peluquero()
             else:
                 time.sleep(3)  
                 self.peluquero.acquire()
